@@ -1,0 +1,26 @@
+# keep in mind this will only work on paid gae, if you want one that
+# works on free google app engine, try:
+#
+# https://github.com/codebam/sean-behan.appspot.com
+
+application: put your application name here, that is the part before .appspot.com
+version: 1
+#vm: true
+runtime: python27
+api_version: 1
+threadsafe: true
+
+runtime_config:
+    python_version: 3
+
+handlers:
+- url: /(.*\.(gif|png|jpg|ico|js|css|psd|swf|xml|svg|ttf|otf|woff|eot))
+  static_files: \1
+  upload: (.*\.(gif|png|jpg|ico|js|css|psd|swf|xml|svg|ttf|otf|woff|eot))
+
+- url: /robots.txt
+  static_files: robots.txt
+  upload: robots.txt
+
+- url: /.*
+  script: main.application
