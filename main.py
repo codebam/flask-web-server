@@ -18,7 +18,7 @@ app.url_map.converters['regex'] = RegexConverter
 def render_():
     return send_from_directory('', 'index.html')
 
-@app.route('/<regex("[\W\S\D]*"):filename>')
+@app.route('/<regex(".+"):filename>')
 def render(filename):
     #return send_from_directory('', filename)
     try:
