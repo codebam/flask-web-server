@@ -1,10 +1,11 @@
 import logging
 
-from flask import Flask, render_template, request, send_from_directory
+from flask import Flask, request, send_from_directory
 from werkzeug.routing import BaseConverter
 
 
 app = Flask(__name__)
+
 
 class RegexConverter(BaseConverter):
     def __init__(self, url_map, *items):
@@ -14,19 +15,22 @@ class RegexConverter(BaseConverter):
 
 app.url_map.converters['regex'] = RegexConverter
 
+
 @app.route('/')
 def render_():
-    return send_from_directory('', 'index.html')
+    return send_from_directory('', 'html/index.html')
+
 
 @app.route('/<regex(".+"):filename>')
 def render(filename):
-    #return send_from_directory('', filename)
+    # return send_from_directory('', filename)
     try:
-        #myfilename = str(list(request.args)[0])
-        return send_from_directory('', filename)
+        # myfilename = str(list(request.args)[0])
+        print('html/' + filename)
+        return send_from_directory('',  'html/' + filename)
     except:
-        #return str(request.args)
-        return send_from_directory('', 'index.html')
+        # return str(request.args)
+        return send_from_directory('', 'html/' + '404.html')
 
 
 if __name__ == '__main__':
